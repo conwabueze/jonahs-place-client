@@ -109,6 +109,7 @@ class SneakerDirectory extends Component {
     }
   }
 
+  //update state in relation to whats being typed in the input fields
   handlePriceFilterInput(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -120,11 +121,13 @@ class SneakerDirectory extends Component {
     e.preventDefault();
   }
 
+  //toggle open and close Filter page when viewing on Mobile
   toggleMobileFilters() {
     if (this.state.mobileFilterOpen) this.setState({ mobileFilterOpen: false });
     else this.setState({ mobileFilterOpen: true });
   }
 
+  //JSX for rendering filter options for model
   renderModelFilterForm() {
     const modelFilterForm = (
       <form className="ModelFilter" onChange={this.checkBoxOnChange}>
@@ -155,6 +158,7 @@ class SneakerDirectory extends Component {
     return typeSplit.join(' ');
   }
 
+  //JSX to render filter options for sizes
   renderSizeFilterForm() {
     const sizeFilterForm = (
       <form className="SizeFilter" onChange={this.checkBoxOnChange}>
@@ -180,6 +184,7 @@ class SneakerDirectory extends Component {
     return sizeFilterForm;
   }
 
+  //JSX to render filter options for price
   renderPriceFilterForm() {
     const priceFilterForm = (
       <form className="PriceFilter">
