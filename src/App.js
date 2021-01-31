@@ -83,6 +83,14 @@ class App extends Component {
               renderSettings={true}
             />
           </Route>
+
+          <Route exact key="sign-up" path="/sign-up">
+            <Account
+              user={this.state.user}
+              appRerender={this.appRerender}
+              renderSignUp={true}
+            />
+          </Route>
         </Switch>
         <Footer />
       </div>

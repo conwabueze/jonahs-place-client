@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import {} from 'react-router-dom';
 import Login from './Login';
+import SignUp from './SignUp';
 import AccountSettings from './AccountSettings';
 import ContentContainer from '../shared/ContentContainer/ContentContainer';
 import axios from 'axios';
@@ -16,17 +17,22 @@ class Account extends Component {
       loginEmailInput: '',
       loginPasswordInput: '',
       loginError: false,
+      signUpNameInput: '',
+      signUpEmailInput: '',
+      signUpPasswordInput: '',
+      signUpPasswordConfirmInput: '',
       redirect: null,
       userName: this.props.user.name,
       userEmail: this.props.user.email,
-      userPassword: 'a',
-      userNewPassword: 'a',
-      userConfirmPassword: 'a',
+      userPassword: '',
+      userNewPassword: '',
+      userConfirmPassword: '',
     };
 
     this.handleAccountInputs = this.handleAccountInputs.bind(this);
     this.loginSubmit = this.loginSubmit.bind(this);
     this.editFormSubmit = this.editFormSubmit.bind(this);
+    this.changePasswordSubmit = this.changePasswordSubmit.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -48,7 +54,7 @@ class Account extends Component {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${apiUrl2}/users/login`,
+        `http://localhost:3001/api/v1/users/login`,
         {
           email: this.state.loginEmailInput,
           password: this.state.loginPasswordInput,
@@ -67,12 +73,6 @@ class Account extends Component {
       this.setState({ loginError: true });
       window.setTimeout(() => this.setState({ loginError: false }), 3000);
     }
-
-    // console.log('fjkdsn');
-    // if (res) {
-    //   console.log('chip');
-    //   this.setState({ loginError: true });
-    // }
   }
 
   //action when you click on edit button in accountSettings
@@ -93,22 +93,28 @@ class Account extends Component {
   async changePasswordSubmit(e) {
     e.preventDefault();
     try {
-      console.log(this.state);
       const res = await axios.patch(
         'http://localhost:3001/api/v1/users/updateMyPassword',
         {
-          currentPasssword: this.state.userPassword,
+          currentPassword: this.state.userPassword,
           newPassword: this.state.userNewPassword,
           newPasswordConfirm: this.state.userConfirmPassword,
         },
         { withCredentials: true }
       );
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
 
-    console.log('password submit clicked');
+      if (res.status === 200) {
+        window.location.reload();
+      }
+
+      if (res.status === 401) {
+        console.log(res);
+      }
+    } catch (err) {
+      if (this.state.userNewPassword !== this.state.userConfirmPassword) {
+        console.log('not equal');
+      }
+    }
   }
 
   renderCorrectComponent() {
@@ -120,7 +126,18 @@ class Account extends Component {
           loginPasswordInput={this.state.loginPasswordInput}
           loginError={this.state.loginError}
           loginSubmit={this.loginSubmit}
+          signUpNameInput={this.state.signUpNameInput}
+          signUpEmailInput={this.state.signUpEmailInput}
+          signUpPasswordInput={this.state.signUpPasswordInput}
+          signUpPasswordConfirmInput={this.state.signUpPasswordConfirmInput}
           redirect={this.state.redirect}
+        />
+      );
+    } else if (this.props.renderSignUp) {
+      return (
+        <SignUp
+          signUpNameInput={this.state.signUpNameInput}
+          handleAccountInputs={this.handleAccountInputs}
         />
       );
     } else if (this.props.renderSettings) {

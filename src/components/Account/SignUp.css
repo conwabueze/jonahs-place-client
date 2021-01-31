@@ -1,36 +1,38 @@
-.Login {
+.SignUp {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 80vh;
+  padding: 3em 0;
 }
 
-.Login-header {
+.SignUp-header {
   font-size: 2.7rem;
   text-transform: uppercase;
   font-weight: 500;
 }
 
-.Login-form {
+.SignUp-form {
   width: 65%;
 }
 
-.Login-label {
+.SignUp-label {
   font-size: 1.5rem;
   text-transform: uppercase;
   font-weight: 300;
+  text-align: center;
 }
 
-.Login-input {
+.SignUp-input {
   margin-bottom: 2.5em;
   height: 3rem;
   width: 100%;
   border: 1px solid #000000;
 }
 
-.Login-submit,
-.Login-sign-up {
+.Signup-submit,
+.SignUp-login {
   font-family: 'Teko', sans-serif;
   font-size: 2rem;
   text-transform: uppercase;
@@ -39,28 +41,23 @@
   margin-bottom: 1.5em;
 }
 
-.Login-submit {
+.Signup-submit {
   background-color: #000000;
   color: #ffffff;
   height: 3.7rem;
 }
 
-.Login-sign-up {
+.SignUp-line-break {
+  border-top: 1px solid #000000;
+  margin-bottom: 3em;
+  width: 65%;
+}
+
+.SignUp-login {
   border: solid 1px black;
   color: #000000;
   width: 65%;
   text-align: center;
   text-decoration: none;
   padding: 0.2em;
-}
-
-.Login-submit:hover {
-  cursor: pointer;
-  background-color: #4f4f4f;
-}
-
-.Login-line-break {
-  border-top: 1px solid #000000;
-  margin-bottom: 3em;
-  width: 65%;
 }

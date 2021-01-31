@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import './Login.css';
 
@@ -51,6 +51,12 @@ class Login extends Component {
           <button className="Login-submit">login</button>
           {renderRedirect}
         </form>
+
+        <div className="Login-line-break"></div>
+
+        <Link to="/sign-up" className="Login-sign-up">
+          sign up
+        </Link>
       </div>
     );
   }
